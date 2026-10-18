@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="粘贴链接先解析预览，只保存点选的图片。">
+  <title>图片与视频下载</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="/" aria-label="图片下载首页"><span class="app-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="m5 16 4-4 3 3 3-4 4 5M15.5 8.5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>图片与视频下载</a>
+    <div class="top-actions"><span class="connection" id="connection"><i></i>本地运行</span><button class="text-button help-trigger">使用说明</button><button class="button subtle" id="open-folder"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.5 6.5V5a2 2 0 0 1 2-2H8l2 2h5.5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>下载文件夹</span></button></div>
+  </header>
+  <main>
+    <section class="composer" aria-labelledby="heading">
+      <div class="composer-heading"><h1 id="heading">粘贴链接，先预览再保存。</h1><span class="composer-tag"><i></i>点哪张，存哪张</span></div>
+      <div class="input-card" id="input-card">
+        <svg class="link-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 15 6-6m-5-2 1-1a4.24 4.24 0 0 1 6 6l-2 2m-1 3-1 1a4.24 4.24 0 0 1-6-6l2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <label class="sr-only" for="url-input">粘贴一个或多个帖子链接，先解析预览</label>
+        <textarea id="url-input" rows="1" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="粘贴帖子链接，支持多条一起粘贴…"></textarea>
+        <button id="paste-button" class="button primary"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="6" y="5" width="10" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M12 5V3H4v10h2" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>粘贴<kbd id="paste-shortcut">⌘ V</kbd></button>
+      </div>
+      <div class="composer-bottom"><div id="input-message" class="input-message" role="status" aria-live="polite">粘贴后只加载预览，点击图片才保存原文件。</div><span class="batch-hint">支持批量链接</span></div>
+    <div id="supported-platforms" class="supported-platforms" aria-label="平台接入和实测状态"></div>
+    </section>
+    <section class="library" aria-labelledby="history-title">
+      <div class="library-toolbar">
+        <div class="library-title"><h2 id="history-title" class="sr-only">图片</h2><div class="view-tabs"><button id="view-preview" class="view-tab active">解析预览</button><button id="view-saved" class="view-tab">已保存</button></div><span id="history-count" class="history-count">0 项</span></div>
+        <div class="library-actions">
+          <span id="selection-count" class="selection-count" aria-live="polite" hidden>已选 0 项</span>
+          <button id="select-all" class="text-button" hidden>全选</button>
+          <button id="download-selected" class="button primary small" hidden>保存所选</button>
+          <button id="export-selected" class="button primary small" hidden>打包所选</button>
+          <button id="toggle-selection" class="button subtle small" disabled><svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="13" height="13" rx="3" stroke="currentColor" stroke-width="1.3"/><path d="m6 9 2 2 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>批量选择</span></button>
+        </div>
+      </div>
+      <div class="library-scroll" id="library-scroll" tabindex="0" aria-label="图片历史记录，可向下滚动">
+        <details id="queue-panel" class="queue-panel" open hidden><summary><span id="queue-summary"></span><span class="queue-summary-arrow">⌄</span></summary><div id="queue-list"></div><button id="retry-failed" class="text-button" hidden>重新解析未完成任务</button></details>
+        <div id="photo-grid" class="photo-grid"></div>
+        <div class="empty-state" id="empty-state"><div class="empty-icon"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="9" y="9" width="30" height="30" rx="7" stroke="currentColor" stroke-width="1.5"/><path d="m11 32 8-8 7 7 5-6 6 7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="29" cy="19" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg></div><h3>图片会出现在这里</h3><p>在上方粘贴链接，解析预览会自动开始。</p></div>
+        <p class="end-note" id="end-note" hidden>点击图片或视频封面保存文件；放大按钮先查看预览</p>
+      </div>
+      <footer><span id="saved-label">只保存你点选的原文件</span><span class="cache-tools"><span id="cache-size">预览缓存 0 KB</span><button id="clear-cache" class="text-button">清理</button></span><span id="folder-path" title="图片保存位置"></span></footer>
+    </section>
+  </main>
+  <dialog id="image-dialog" class="image-dialog" aria-labelledby="image-title">
+    <div class="viewer-top"><span id="image-title">图片预览</span><span id="image-position"></span><button class="icon-button" id="close-image" aria-label="关闭图片预览">×</button></div>
+    <div class="viewer-stage"><button class="viewer-nav previous" id="previous-image" aria-label="上一张图片">‹</button><img id="preview-image" alt="媒体预览"><video id="preview-video" controls preload="none" playsinline hidden></video><button class="viewer-nav next" id="next-image" aria-label="下一张图片">›</button></div>
+    <div class="viewer-bottom"><div><span id="preview-platform" class="preview-platform"></span><span id="preview-info"></span></div><div><a id="preview-original" class="text-button" target="_blank" rel="noopener noreferrer">原帖 ↗</a><button class="text-button" id="preview-retry">重新解析</button><button class="button primary small" id="preview-save">保存原文件</button><button class="text-button" id="preview-folder">打开文件夹 ↗</button></div></div>
+  </dialog>
+  <dialog id="help-dialog" class="help-dialog"><div class="dialog-heading"><h2>使用说明</h2><button class="icon-button" id="close-help" aria-label="关闭说明">×</button></div><div class="help-content"><p>粘贴 Instagram、X、小红书、抖音、TikTok、B站、YouTube、微博或 Pinterest 的帖子链接后，先解析媒体清单并加载图片预览或视频封面，<strong>不会自动把整组原文件存入下载目录</strong>。进度会显示已加载预览数、总数和实际耗时。</p><p>点击哪张图片，就保存哪张原文件。放大按钮只查看预览；“批量选择 → 保存所选”可以保存多张。在“已保存”里可查看原文件、打开文件夹或打包。</p><p>图片保留原比例，按原帖顺序进入瀑布流；角上的编号是它在原帖图片中的顺序。来源使用彩色平台图标。</p><details><summary>解析和预览占多少存储？</summary><p>解析清单主要是链接、尺寸等少量文字数据。显示预览需要传输图片数据，优先使用平台提供的小图，生成小尺寸 JPEG 缓存；没有小图时可能临时读取较大图片用于缩略图，响应数据处理后释放，不把原文件保存在下载目录。</p><p>未选中的图片只保留小预览和链接记录。页面底部显示实际预览缓存大小，可随时清理；预览缓存最多 100 MB、保留 24 小时。浏览器显示图片也会使用一定内存，由浏览器管理。</p></details><p>配色自动跟随系统。支持具体帖子和部分平台的分享短链接，不会自动抓取整个账号。下方平台标识可查看本机实测状态，部分平台需要有效分享参数或 Cookie。视频默认保存平台当前会话可获取的最佳画质；不保证获得上传前的母版。作者印在画面里的水印会保留。</p><details><summary>内容需要登录时</summary><p>将有效会话导出为 Netscape 格式的 Cookie 文件，保存在项目的 <code>cookies/instagram.txt</code> 或其他平台的 <code>cookies/平台标识.txt</code>（例如 <code>cookies/douyin.txt</code>、<code>cookies/weibo.txt</code>）。Instagram 优先匿名解析，失败时再使用已配置会话；程序不会自动读取浏览器里的 Cookie。</p></details></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

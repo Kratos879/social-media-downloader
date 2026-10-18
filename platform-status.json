@@ -1,0 +1,56 @@
+[
+  {
+    "id": "instagram",
+    "name": "Instagram",
+    "state": "verified",
+    "detail": "已实测图片解析与点选保存"
+  },
+  {
+    "id": "twitter",
+    "name": "X / Twitter",
+    "state": "verified",
+    "detail": "已实测图集解析与点选保存"
+  },
+  {
+    "id": "xiaohongshu",
+    "name": "小红书",
+    "state": "verified",
+    "detail": "已实测 4 图笔记预览，只保存选中第 3 张；需要有效分享链接和会话"
+  },
+  {
+    "id": "douyin",
+    "name": "抖音",
+    "state": "verified",
+    "detail": "F2 已实测当前有效视频的封面解析与选中保存；需要有效作品链接和会话"
+  },
+  {
+    "id": "tiktok",
+    "name": "TikTok",
+    "state": "limited",
+    "detail": "图集 4/4 保存通过；完整视频曾成功，发布前复测遇到源站 429/503 限流，视频当前不保证成功"
+  },
+  {
+    "id": "bilibili",
+    "name": "哔哩哔哩",
+    "state": "verified",
+    "detail": "已实测视频解析、封面预览、选中下载和音视频合并"
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "state": "verified",
+    "detail": "已实测视频预览、选中下载、音视频合并和页面播放"
+  },
+  {
+    "id": "weibo",
+    "name": "微博",
+    "state": "verified",
+    "detail": "已实测公开帖图片预览与选中保存；部分帖子需要会话"
+  },
+  {
+    "id": "pinterest",
+    "name": "Pinterest",
+    "state": "verified",
+    "detail": "已实测图片预览与选中保存"
+  }
+]

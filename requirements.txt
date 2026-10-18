@@ -1,0 +1,6 @@
+instaloader==4.15.4
+gallery-dl==1.32.17
+Pillow>=11,<13
+yt-dlp[default]==2026.8.19
+imageio-ffmpeg==0.6.0
+curl-cffi==0.16.3

@@ -1,0 +1,9 @@
+.venv/
+.engines/
+__pycache__/
+*.pyc
+data/
+下载/
+cookies/*
+!cookies/.gitkeep
+.DS_Store

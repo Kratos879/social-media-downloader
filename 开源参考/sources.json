@@ -1,0 +1,45 @@
+[
+  {
+    "package": "yt-dlp",
+    "version": "2026.8.19",
+    "source_archive": "yt_dlp-2026.8.19.tar.gz",
+    "sha256": "9e213e48cea35c66b378e4447903f118f6392a5fa380a2b6d7070ec86f4e0af1",
+    "source_url": "https://files.pythonhosted.org/packages/1e/e0/832fa4ca334b766a06933a196066edc3dba37cdb6f14cd98d59bcc69a4b4/yt_dlp-2026.8.19.tar.gz",
+    "project": {
+      "Documentation": "https://github.com/yt-dlp/yt-dlp#readme",
+      "Funding": "https://github.com/yt-dlp/yt-dlp/blob/master/Maintainers.md#maintainers",
+      "Repository": "https://github.com/yt-dlp/yt-dlp",
+      "Tracker": "https://github.com/yt-dlp/yt-dlp/issues"
+    }
+  },
+  {
+    "package": "gallery-dl",
+    "version": "1.32.17",
+    "source_archive": "gallery_dl-1.32.17.tar.gz",
+    "sha256": "7e49b3140d23b88e020ff24049dfac59edd855d6fdfb11bc725ad44b0335bbb6",
+    "source_url": "https://files.pythonhosted.org/packages/4e/7e/3ba52253f4edc121c2e5d4cc1bbc613c29822acd3435eecc54e6308157a5/gallery_dl-1.32.17.tar.gz",
+    "project": {
+      "Download": "https://codeberg.org/mikf/gallery-dl/releases/latest",
+      "Homepage": "https://codeberg.org/mikf/gallery-dl"
+    }
+  },
+  {
+    "package": "instaloader",
+    "version": "4.15.4",
+    "source_archive": "instaloader-4.15.4.tar.gz",
+    "sha256": "3fde2f5e9421449344d7e05a41d1ea853ef17efead5a272e4af2728b0eaf38b9",
+    "source_url": "https://files.pythonhosted.org/packages/eb/e1/e4a53e61dc719ea5ff89df171567a91e797a0e5bf5fba067cc892421a2fc/instaloader-4.15.4.tar.gz",
+    "project": {
+      "Homepage": "https://instaloader.github.io/"
+    }
+  },
+  {
+    "package": "f2",
+    "version": "source-f6be8c0",
+    "commit": "f6be8c0ffba9a127075bbeafe4838716650b6325",
+    "source_archive": "f2-f6be8c0.tar.gz",
+    "sha256": "37b499b2e343891c4112e6f204f0029fc2f9d35e15e5d7c5e1d23b8d470a2e65",
+    "source_url": "https://codeload.github.com/Johnserf-Seed/f2/tar.gz/f6be8c0ffba9a127075bbeafe4838716650b6325",
+    "project": "https://github.com/Johnserf-Seed/f2"
+  }
+]
