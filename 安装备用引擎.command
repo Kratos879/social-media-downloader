@@ -14,5 +14,5 @@ if [ -z "$runtime_python" ]; then
 fi
 mkdir -p .engines
 "$runtime_python" -m venv .engines/f2
-.engines/f2/bin/python -m pip install --disable-pip-version-check 开源参考/f2-f6be8c0.tar.gz
+.engines/f2/bin/python -m pip install --disable-pip-version-check 'f2 @ https://codeload.github.com/Johnserf-Seed/f2/tar.gz/f6be8c0ffba9a127075bbeafe4838716650b6325#sha256=37b499b2e343891c4112e6f204f0029fc2f9d35e15e5d7c5e1d23b8d470a2e65'
 echo '备用引擎已安装，粘贴抖音链接后会自动使用。'

@@ -29,7 +29,7 @@ python3 -m venv .venv
 .venv/bin/python server.py --open
 ```
 
-抖音使用独立 F2 引擎。首次运行“安装备用引擎.command”安装它（需要 Python 3.11+），然后仍在同一个页面粘贴链接。安装器使用项目中固定提交的 F2 源码包。
+抖音使用独立 F2 引擎。首次运行“安装备用引擎.command”安装它（需要 Python 3.11+），然后仍在同一个页面粘贴链接。安装器从 F2 官方仓库下载固定提交，并校验 SHA256；首次安装需要联网。
 
 Windows 可用 `.venv\Scripts\python.exe` 替换上述 Python 路径启动核心服务；一键启动和抖音引擎安装脚本面向 macOS / Unix，Windows 尚未完成整体验收。
 
@@ -50,8 +50,6 @@ Windows 可用 `.venv\Scripts\python.exe` 替换上述 Python 路径启动核心
 | 哔哩哔哩 | 封面、时长、视频保存与音视频合并 | 已通过 |
 | TikTok | 图集 4/4 保存通过；完整视频曾保存成功，但发布前复测遭源站 429/503 限流，视频当前不保证成功 | 图集通过，视频受限 |
 | 抖音 | 最新 F2 解析当前有效作品，封面预览和选中视频保存 | 已通过 |
-
-发布前本轮的逐项结果见 [2026-10-18 验证记录](docs/verification-2026-10-18.md)。具体开源项目、固定版本、候选取舍、此前测试样例见 [开源项目与验证.md](开源项目与验证.md)。官方源代码发行包集中放在 `开源参考/`，来源与 SHA256 在 `开源参考/sources.json`。
 
 ## 使用
 
@@ -78,6 +76,12 @@ Windows 可用 `.venv\Scripts\python.exe` 替换上述 Python 路径启动核心
 
 新安装的项目不包含任何人的 Cookie。内容需要登录时，程序使用自己配置的 `cookies/平台标识.txt` Netscape Cookie 文件，例如：
 
+先在项目目录创建仅供本机使用的目录：
+
+```bash
+mkdir -p cookies
+```
+
 ```text
 cookies/xiaohongshu.txt
 cookies/douyin.txt
@@ -101,9 +105,9 @@ cookies/twitter.txt
 - `server.py`：仅监听本机，提供选择保存、打包、原文件流式读取及视频 Range 请求。
 - `web/`：原生 HTML / CSS / JavaScript，系统明暗主题、按原比例瀑布流、品牌色图标。
 
-使用 [Instaloader](https://github.com/instaloader/instaloader)（MIT）、[gallery-dl](https://github.com/mikf/gallery-dl)（GPL-2.0）、[yt-dlp](https://github.com/yt-dlp/yt-dlp)（Unlicense）作为安装依赖。源代码归档保留上游许可，详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。平台图形来自 [Simple Icons](https://github.com/simple-icons/simple-icons)（CC0），另加背景和品牌色；FFmpeg 二进制的许可信息随 imageio-ffmpeg 分发。
+使用 [Instaloader](https://github.com/instaloader/instaloader)（MIT）、[gallery-dl](https://github.com/mikf/gallery-dl)（GPL-2.0）、[yt-dlp](https://github.com/yt-dlp/yt-dlp)（Unlicense）作为安装依赖。第三方依赖使用各自许可，详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。平台图形来自 [Simple Icons](https://github.com/simple-icons/simple-icons)（CC0），另加背景和品牌色；FFmpeg 二进制的许可信息随 imageio-ffmpeg 分发。
 
-本项目自行编写的代码使用 [MIT 许可](LICENSE)；第三方代码及归档适用各自上游许可。
+本项目自行编写的代码使用 [MIT 许可](LICENSE)；第三方代码适用各自上游许可。
 
 ## 检查
 

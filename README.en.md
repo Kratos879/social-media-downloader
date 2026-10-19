@@ -38,7 +38,7 @@ For Douyin, also run:
 bash 安装备用引擎.command
 ```
 
-The installer uses the pinned F2 source archive included in this repository, rather than an older PyPI release.
+The installer downloads a pinned commit from the official F2 repository and verifies its SHA256 checksum. An internet connection is required for the initial installation.
 
 On Windows, use `.venv\Scripts\python.exe` for the core service. The bundled launcher and Douyin setup scripts target macOS / Unix; the complete Windows workflow has not been verified.
 
@@ -58,11 +58,15 @@ Live tests on macOS, including pasting links in the browser and saving selected 
 | Weibo | Public photo post | Some posts require a session |
 | Pinterest | Image Pin | Public sample worked without login |
 
-See the [2026-10-18 pre-publication checks](docs/verification-2026-10-18.md) for the latest results, and [the test and source notes](开源项目与验证.md) for versions, sample links, and earlier tests. Mixed photo/video carousels, Live Photos, and live streams have not been fully verified. Quality depends on the files returned by the platform for the current session. The app does not promise the pre-upload master file or remove watermarks embedded in the content.
+Mixed photo/video carousels, Live Photos, and live streams have not been fully verified. Quality depends on the files returned by the platform for the current session. The app does not promise the pre-upload master file or remove watermarks embedded in the content.
 
 ## Local sessions
 
-The repository **does not include anyone's cookies**. When a platform requires authentication, provide your own valid Netscape-format cookie file, for example:
+The repository **does not include anyone's cookies**. When a platform requires authentication, create a local directory and provide your own valid Netscape-format cookie file:
+
+```bash
+mkdir -p cookies
+```
 
 ```text
 cookies/xiaohongshu.txt
@@ -90,9 +94,9 @@ Cookie files, downloads, runtime data, and virtual environments are excluded fro
 
 Built with [Instaloader](https://github.com/instaloader/instaloader), [gallery-dl](https://github.com/mikf/gallery-dl), [yt-dlp](https://github.com/yt-dlp/yt-dlp), [F2](https://github.com/Johnserf-Seed/f2), and small platform adapters. FFmpeg is supplied by imageio-ffmpeg. Platform artwork comes from [Simple Icons](https://github.com/simple-icons/simple-icons).
 
-Pinned source archives, source URLs, and SHA256 checksums are included under `开源参考/`. Their upstream license files remain inside the archives. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Dependencies are installed from their upstream sources. The Douyin installer pins the F2 commit and verifies its SHA256 checksum. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for upstream projects and licenses.
 
-Original code written for this project is available under the [MIT license](LICENSE). Third-party code and archives remain under their respective upstream licenses.
+Original code written for this project is available under the [MIT license](LICENSE). Third-party code remains under its respective upstream license.
 
 ## Checks
 
